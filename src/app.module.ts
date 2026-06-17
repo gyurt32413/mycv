@@ -13,6 +13,8 @@ import { Report } from './reports/report.entity';
       type: 'sqlite',
       database: 'db.sqlite',
       entities: [User, Report],
+
+      // 只在開發環境使用，用途是自動同步資料庫結構，生產環境應該設置為 false以避免意外修改資料庫結構
       synchronize: true,
     }),
     UsersModule,

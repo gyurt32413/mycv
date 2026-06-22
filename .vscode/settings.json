@@ -1,0 +1,7 @@
+{
+  "github.copilot.chat.codeGeneration.instructions": [
+    {
+      "text": "請一律使用繁體中文（zh-TW）回覆，程式註解也使用繁體中文；除非我明確要求，否則不要使用日文。"
+    }
+  ]
+}

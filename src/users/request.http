@@ -6,3 +6,9 @@ Content-Type: application/json
   "email": "gyurt32413@gmail.com",
   "password": "12345678"
 }
+
+### find user
+GET http://localhost:3000/auth/1
+
+### find all users
+GET http://localhost:3000/auth?email=gyurt32413@gmail.com

@@ -7,6 +7,8 @@ import {
   Column,
 } from 'typeorm';
 
+import { Exclude } from 'class-transformer';
+
 // 慣例命名 User 不用 UserEntity
 @Entity()
 export class User {
@@ -18,6 +20,7 @@ export class User {
   email!: string;
 
   @Column()
+  @Exclude()
   password!: string;
 
   // AfterInsert 是 TypeORM 提供的生命週期事件裝飾器(hook)，會在實體被插入資料庫後觸發

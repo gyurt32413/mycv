@@ -14,6 +14,8 @@ import { UserDto } from './dtos/user.dto';
 import { UsersService } from './users.service';
 import { Serialize } from './interceptor/serialize.interceptor';
 
+// 放在這邊可以套用到所有的請求
+@Serialize(UserDto)
 @Controller('auth')
 export class UsersController {
   constructor(private usersService: UsersService) {}
@@ -24,7 +26,6 @@ export class UsersController {
   }
 
   // @UseInterceptors(new SerializeInterceptor(UserDto))
-  @Serialize(UserDto)
   @Get('/:id')
   async findUser(@Param('id') id: string) {
     console.log(`Finding user with id: ${id}`);

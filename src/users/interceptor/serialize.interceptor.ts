@@ -23,6 +23,7 @@ export class SerializeInterceptor implements NestInterceptor {
     // run this code before the request is handled
 
     return next.handle().pipe(
+      // map 是用來轉換資料的操作符，將原始資料轉換為指定的 DTO 類型
       map((data: any) => {
         // run this code after the request is handled
         return plainToInstance(this.dto, data, {

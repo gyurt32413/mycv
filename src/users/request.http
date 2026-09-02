@@ -7,6 +7,16 @@ Content-Type: application/json
   "password": "12345678"
 }
 
+### sign in
+POST http://localhost:3000/auth/signin
+Content-Type: application/json
+
+{
+  "email": "gyurt32@gmail.com",
+  "password": "1234567"
+}
+# 
+
 ### find user
 GET http://localhost:3000/auth/2
 

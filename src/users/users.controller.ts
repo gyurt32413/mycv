@@ -41,14 +41,34 @@ export class UsersController {
   }
 
   @Post('/signup')
-  async createUser(@Body() body: CreateUserDto) {
-    await this.authService.signUp(body.email, body.password);
+  async createUser(
+    @Body() body: CreateUserDto,
+    @Session() session: { userId?: number },
+  ) {
+    const user = await this.authService.signUp(body.email, body.password);
+    session.userId = user.id;
+    return user;
   }
 
   @Post('/signin')
-  async signIn(@Body() body: CreateUserDto) {
+  async signIn(
+    @Body() body: CreateUserDto,
+    @Session() session: { userId?: number },
+  ) {
     const user = await this.authService.signIn(body.email, body.password);
+    session.userId = user.id;
     return user;
+  }
+
+  @Get('/whoami')
+  async whoAmI(@Session() session: { userId?: number }) {
+    const user = await this.usersService.findOne(session.userId);
+    return user;
+  }
+
+  @Post('/signout')
+  signOut(@Session() session: { userId?: number }) {
+    session.userId = undefined;
   }
 
   // @UseInterceptors(new SerializeInterceptor(UserDto))

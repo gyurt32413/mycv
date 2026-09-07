@@ -8,14 +8,20 @@ Content-Type: application/json
 }
 
 ### sign in
+// cookie 只有在更新的時候才會顯示在請求結果
 POST http://localhost:3000/auth/signin
 Content-Type: application/json
 
 {
   "email": "gyurt32@gmail.com",
-  "password": "1234567"
+  "password": "12345678"
 }
-# 
+
+### who am I
+GET http://localhost:3000/auth/whoami
+
+### sign out
+POST http://localhost:3000/auth/signout
 
 ### find user
 GET http://localhost:3000/auth/2

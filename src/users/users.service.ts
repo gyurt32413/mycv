@@ -23,7 +23,11 @@ export class UsersService {
     // return this.repo.save({ email, password });
   }
 
-  async findOne(id: number) {
+  async findOne(id: number | undefined) {
+    if (!id) {
+      throw new NotFoundException('User not found');
+    }
+
     const user = await this.repo.findOne({ where: { id } });
     if (!user) {
       throw new NotFoundException('User not found');

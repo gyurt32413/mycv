@@ -33,3 +33,9 @@ Content-Type: application/json
 {
   "email": "gy@gmail.com"
 }
+
+### 測試
+GET http://localhost:3000/auth/colors/blue222
+
+### 測試
+GET http://localhost:3000/auth/colors

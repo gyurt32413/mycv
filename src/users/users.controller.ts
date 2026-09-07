@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Patch,
+  Session,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
@@ -23,6 +24,21 @@ export class UsersController {
     private usersService: UsersService,
     private authService: AuthService,
   ) {}
+
+  // 測試 cookie session
+  @Get('/colors/:color')
+  setColor(
+    @Param('color') color: string,
+    @Session() session: { color?: string },
+  ) {
+    // 設置 cookie
+    session.color = color;
+  }
+
+  @Get('/colors')
+  getColor(@Session() session: { color?: string }): string | undefined {
+    return session.color;
+  }
 
   @Post('/signup')
   async createUser(@Body() body: CreateUserDto) {

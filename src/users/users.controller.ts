@@ -8,6 +8,7 @@ import {
   Delete,
   Patch,
   Session,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
@@ -15,9 +16,13 @@ import { UserDto } from './dtos/user.dto';
 import { UsersService } from './users.service';
 import { AuthService } from './auth.service';
 import { Serialize } from './interceptor/serialize.interceptor';
+import { CurrentUser } from './decorators/current-user.decorator';
+import { CurrentUserInterceptor } from './interceptor/current-user.interceptor';
+import { User } from './user.entity';
 
 // 放在這邊可以套用到所有的請求
 @Serialize(UserDto)
+@UseInterceptors(CurrentUserInterceptor)
 @Controller('auth')
 export class UsersController {
   constructor(
@@ -61,8 +66,7 @@ export class UsersController {
   }
 
   @Get('/whoami')
-  async whoAmI(@Session() session: { userId?: number }) {
-    const user = await this.usersService.findOne(session.userId);
+  whoAmI(@CurrentUser() user: User) {
     return user;
   }
 

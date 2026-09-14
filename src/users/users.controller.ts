@@ -8,6 +8,7 @@ import {
   Delete,
   Patch,
   Session,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
@@ -17,6 +18,7 @@ import { AuthService } from './auth.service';
 import { Serialize } from './interceptor/serialize.interceptor';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { User } from './user.entity';
+import { AuthGuard } from '../guard/auth.guard';
 
 // 放在這邊可以套用到所有的請求
 @Serialize(UserDto)
@@ -62,6 +64,7 @@ export class UsersController {
     return user;
   }
 
+  @UseGuards(AuthGuard)
   @Get('/whoami')
   whoAmI(@CurrentUser() user: User) {
     return user;
